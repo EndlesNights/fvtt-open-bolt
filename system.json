@@ -18,7 +18,7 @@
         }
     ],
     "scripts": [],
-    "esmodules": ["system/open-bolt.mjs"],
+    "esmodules": ["system/open-bolt.js"],
     "styles": ["styles/open-bolt.css"],
     "languages": [
         {
