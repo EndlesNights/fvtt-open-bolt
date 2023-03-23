@@ -3,24 +3,18 @@
 // })
 
 export async function dropfolder(...args){
-	// const canvas = args[0];
-	console.log(canvas)
 	const doc = args[1];
-	console.log(doc)
 	if(doc.type !== "Folder" && doc.documentName !== "Actor") return;
 
-	const rootFolder = game.folders.get(doc._id);
-	console.log(game.folders);
-	console.log(doc.id);
-	const ActorGroups = [rootFolder.content];
+	//get the id from the uuid
+	const rootFolder = game.folders.get(doc.uuid.match(/\.(\w+)$/)[1]);
+	const ActorGroups = [rootFolder.contents];
 	const folders = [];
 	folders.push(...rootFolder.children);
 
-
-	console.log(folders)
 	while(folders.length){
 		folders.push(...folders[0].children); 
-		ActorGroups.push(folders[0].content);
+		ActorGroups.push(folders[0].contents);
 		folders.shift();
 	}
 
@@ -28,16 +22,23 @@ export async function dropfolder(...args){
 
 	let xOffset = 0;
 	let yOffset = 0;
+	
 	for (const content of ActorGroups) {
+		let largestHeight = 0;
+
 		if(!content.length) continue;
 		for (const actor of content) {
-			const tokenData = actor.data.token.toJSON();
+			const tokenData = actor.prototypeToken.toJSON();
 			tokenData.x = doc.x + xOffset;
 			tokenData.y = doc.y + yOffset;
 			await TokenDocument.create(tokenData, { parent: canvas.scene });
-			xOffset += 100;
+			xOffset += tokenData.width * canvas.grid.size;
+
+			if(tokenData.height * canvas.grid.size > largestHeight){
+				largestHeight = tokenData.height * canvas.grid.size;
+			}
 		}
-		yOffset += 100;
+		yOffset += largestHeight;
 		xOffset = 0;
 	}
 }
