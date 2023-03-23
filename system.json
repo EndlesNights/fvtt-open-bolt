@@ -1,0 +1,33 @@
+{
+    "id":"open-bolt",
+    "title":"Open-Bolt",
+    "description": "Open Bolt, an experimental Wargame for Foundry VTT",
+    "version": "0.0.0",
+    "compatibility": {
+        "minimum": 10,
+        "verified": 11,
+        "maximum": 11
+    },
+    "relationships": {
+        "requires": []
+    },
+    "authors": [
+        {
+            "name": "EndlesNights",
+            "discord": "EndlesNights#9000"
+        }
+    ],
+    "scripts": [],
+    "esmodules": ["system/open-bolt.mjs"],
+    "styles": ["styles/open-bolt.css"],
+    "languages": [
+        {
+          "lang": "en",
+          "name": "English",
+          "path": "lang/en.json"
+        }
+      ],
+      "url": "https://github.com/EndlesNights/fvtt-open-bolt",
+      "manifest": "TBD",
+      "download": "TBD"
+}
