@@ -2,6 +2,11 @@
 
 // })
 
+/**
+ * Called on the dropCanvasData Hook, allows users to drag and drop folders of actors to place all of them at once
+ * @param  {...*} args Arguments passed from the hook
+ * 
+ */
 export async function dropfolder(...args){
 	const doc = args[1];
 	if(doc.type !== "Folder" && doc.documentName !== "Actor") return;
